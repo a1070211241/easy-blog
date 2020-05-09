@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block head %}
+    <h2>{% block title %}New Post{% endblock %}</h2>
+{% endblock %}
+
+{% block content %}
+    <div class="update">
+    <form method="post" class="new_post">
+    <p>
+        <label for="title">标题：</label>
+        <input type="text" name="title" id="title" value="{{ request.form['title'] }}" required autocomplete="off">
+    </p>
+    <p>
+        <label for="body">正文：</label>
+        <textarea name="body" id="body" minlength="1">{{ request.form['body'] }}</textarea>
+    </p>
+    <button type="submit" id="submit">Save</button>
+    </form>
+    </div>
+{% endblock %}

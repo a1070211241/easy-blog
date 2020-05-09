@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}{% endblock %} - PAGE</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='blog_style.css') }}">
+</head>
+<body>
+<header>
+    <div class="header">
+        <h1><a href="{{ url_for('index') }}">MyBlog</a></h1>
+        <nav>
+            <ul>
+                {% if g.user %}
+                <li><span>{{ g.user['username'] }}</span></li>
+                <li><a href="{{ url_for('auth.logout') }}">Log Out</a></li>
+                {% else %}
+                <li><a href="{{ url_for('auth.register') }}">Register</a></li>
+                <li><a href="{{ url_for('auth.login') }}">Log In</a></li>
+                {% endif %}
+            </ul>
+        </nav>
+    </div>
+</header>
+<section class="content">
+    <div class="head">
+        {% block head %}{% endblock %}
+    </div>
+    {% for message in get_flashed_messages() %}
+    <div class="flash">{{ message }}</div>
+    {% endfor %}
+    {% block content %}{% endblock %}
+</section>
+</body>
+</html>
